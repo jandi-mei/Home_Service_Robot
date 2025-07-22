@@ -33,3 +33,61 @@ This project involves the development of a home service robot that can navigate 
 
 ## Conclusion
 In summary, the Home Service Robot project utilizes a combination of mapping, localization, and navigation packages that work together to enable the robot to understand its environment, keep track of its position, and navigate to specified goals. The algorithms employed, such as FastSLAM for mapping and Monte Carlo Localization for localization, are essential for achieving robust and efficient robot operation in dynamic environments.
+
+## Steps to Run the Project
+
+1. **Install Dependencies**:
+   Ensure that you have ROS and Gazebo installed on your system. Follow the installation instructions from the [ROS website](http://wiki.ros.org/ROS/Installation) and the [Gazebo website](http://gazebosim.org/).
+
+2. **Clone the Repository**:
+   Clone your project repository to your local machine:
+   ```bash
+   git clone <repository_url>
+   cd project_directory
+
+3. **Build the Project**: Navigate to the project directory and build the project using catkin_make:
+
+        cd ~/catkin_ws
+        catkin_make
+
+4. **Source the Workspace**: Source the workspace to ensure ROS can find your packages:
+
+        source devel/setup.bash
+
+5. **Launch the Home Service Project**: This will launch Gazebo with the custom world, AMCL localization or SLAM, RViz for visualization, Autonomous navigation and pick/drop behavior:
+
+        cd ~/catkin_ws/src/scripts
+        chmod +x home_service.sh
+        ./home_service.sh
+
+
+## Optional: Run Components Individually
+You can run each stage of the pipeline independently:
+
+        ./test_slam.sh         # SLAM and manual mapping
+        ./test_navigation.sh   # Navigation using pre-built map
+        ./pick_objects.sh      # Send pickup and drop-off goals
+        ./add_markers.sh       # Publish markers in RViz
+
+
+## Project Structure
+```text
+    src/
+    ├── scripts/
+    │   ├── home_service.sh
+    │   ├── test_slam.sh
+    │   ├── test_navigation.sh
+    │   ├── pick_objects.sh
+    │   └── add_markers.sh
+    │
+    ├── src/
+    │   ├── pick_objects/
+    │   ├── add_markers/
+    │   └── map/
+    │
+    ├── rvizConfig/
+    │   └── home_service.rviz
+    │
+    └── World/
+        └── home_service.world
+
